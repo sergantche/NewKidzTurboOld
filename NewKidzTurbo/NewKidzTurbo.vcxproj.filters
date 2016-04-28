@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы исходного кода">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Заголовочные файлы">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Заголовочные файлы\alglib">
+      <UniqueIdentifier>{41f72289-12ee-48e5-ae62-98238bd2e5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\gridgeneration">
+      <UniqueIdentifier>{e4f17b9e-9263-42cf-a3e2-a303b5505d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\gridloading">
+      <UniqueIdentifier>{a0000fde-17c7-4f94-97a7-b835b8767718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\misc">
+      <UniqueIdentifier>{aefed24f-e7d4-44b0-bbaf-6977f0c8cac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\turbulentmodels">
+      <UniqueIdentifier>{55218ad8-cecd-4286-a5a1-ea892c3cba09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\reimannsolvers">
+      <UniqueIdentifier>{d8e53ede-5e9e-4e6e-ada2-9438763c4910}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\RTI">
+      <UniqueIdentifier>{c786ee5a-dbc7-4fc0-866c-fd2195dcba36}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\main.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="..\prandtl.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\alglibinternal.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\alglibmisc.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\ap.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\dataanalysis.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\diffequations.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\fasttransforms.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\integration.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\interpolation.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\linalg.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\optimization.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\solvers.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\specialfunctions.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\statistics.cpp">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\datatypes.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\grid.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\model.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\patch.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gengrid1D.h">
+      <Filter>Заголовочные файлы\gridgeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gengrid2D.h">
+      <Filter>Заголовочные файлы\gridgeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gridgeneration.h">
+      <Filter>Заголовочные файлы\gridgeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cgnsload.h">
+      <Filter>Заголовочные файлы\gridloading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\basetypes.h">
+      <Filter>Заголовочные файлы\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geomfunctions.h">
+      <Filter>Заголовочные файлы\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\perfect_gas_roe_3d.h">
+      <Filter>Заголовочные файлы\reimannsolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\riemannsolvers.h">
+      <Filter>Заголовочные файлы\reimannsolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\biffplatemodel.h">
+      <Filter>Заголовочные файлы\turbulentmodels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\garbarukmodel.h">
+      <Filter>Заголовочные файлы\turbulentmodels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SAmodel.h">
+      <Filter>Заголовочные файлы\turbulentmodels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resource.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\incompress2D_Flow.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\triangleload.h">
+      <Filter>Заголовочные файлы\gridloading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tests.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\releigh-taylor_comp.h">
+      <Filter>Заголовочные файлы\RTI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\RTI_solution_processor.h">
+      <Filter>Заголовочные файлы\RTI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\perfect_gas_hllc_3d.h">
+      <Filter>Заголовочные файлы\reimannsolvers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\temporary_tests.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\alglibinternal.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\alglibmisc.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\ap.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\dataanalysis.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\diffequations.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\fasttransforms.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\integration.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\interpolation.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\linalg.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\optimization.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\solvers.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\specialfunctions.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\statistics.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\stdafx.h">
+      <Filter>Заголовочные файлы\alglib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+</Project>

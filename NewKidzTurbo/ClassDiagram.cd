@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Cell">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAkQIgCAAAAAAAQAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Projects\NewKidzTurbo\grid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DistributedEntityManager&lt;DataNode&gt;" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAABAAACIAAAAAAAAEAAABAAQAAAAACAEA=</HashCode>
+      <FileName>D:\Projects\NewKidzTurbo\grid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GridInfo" Collapsed="true">
+    <Position X="7" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAABAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>D:\Projects\NewKidzTurbo\grid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Grid" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>wAAQCgAIAAAACAAAAAAIIBICAAAAAQAAACAgDAAAIYA=</HashCode>
+      <FileName>D:\Projects\NewKidzTurbo\grid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Node" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>D:\Projects\NewKidzTurbo\grid.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Face">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAARCBAAhAAAAAQAAAABAAAAAAAABAAAAAAAAAAAIA=</HashCode>
+      <FileName>D:\Projects\NewKidzTurbo\grid.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="FaceComparer" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Projects\NewKidzTurbo\grid.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

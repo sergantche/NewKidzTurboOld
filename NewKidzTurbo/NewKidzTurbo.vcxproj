@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2AEF178A-5D92-422F-98F0-89D79F5AB78E}</ProjectGuid>
+    <RootNamespace>NewKidzTurbo</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>D:\Dropbox\!Sega\GitHub\NewKidzTurboOld\libs\alglib-3.4.0.cpp\cpp\src;D:\Dropbox\!Sega\GitHub\TurboStructred\libs\eigen;D:\Dropbox\!Sega\Projects\Libs\cgns\CGNS\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Dropbox\!Sega\Projects\Libs\MKL_include\intel64;D:\Dropbox\!Sega\Projects\Libs\cgns\CGNS\build\src\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cgns.lib;mkl_core.lib;mkl_sequential.lib;mkl_intel_lp64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>D:\Dropbox\!Sega\GitHub\NewKidzTurboOld\libs\alglib-3.4.0.cpp\cpp\src;D:\Dropbox\!Sega\GitHub\TurboStructred\libs\eigen;D:\Dropbox\!Sega\Projects\Libs\cgns\CGNS\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>D:\Dropbox\!Sega\Projects\Libs\MKL_include\intel64;D:\Dropbox\!Sega\Projects\Libs\cgns\CGNS\build\src\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cgns.lib;mkl_core.lib;mkl_sequential.lib;mkl_intel_lp64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\alglibinternal.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\alglibmisc.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\ap.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\dataanalysis.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\diffequations.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\fasttransforms.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\integration.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\interpolation.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\linalg.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\optimization.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\solvers.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\specialfunctions.cpp" />
+    <ClCompile Include="..\libs\alglib-3.4.0.cpp\cpp\src\statistics.cpp" />
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\prandtl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\basetypes.h" />
+    <ClInclude Include="..\biffplatemodel.h" />
+    <ClInclude Include="..\cgnsload.h" />
+    <ClInclude Include="..\datatypes.h" />
+    <ClInclude Include="..\garbarukmodel.h" />
+    <ClInclude Include="..\gengrid1D.h" />
+    <ClInclude Include="..\gengrid2D.h" />
+    <ClInclude Include="..\geomfunctions.h" />
+    <ClInclude Include="..\grid.h" />
+    <ClInclude Include="..\gridgeneration.h" />
+    <ClInclude Include="..\incompress2D_Flow.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\alglibinternal.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\alglibmisc.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\ap.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\dataanalysis.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\diffequations.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\fasttransforms.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\integration.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\interpolation.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\linalg.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\optimization.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\solvers.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\specialfunctions.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\statistics.h" />
+    <ClInclude Include="..\libs\alglib-3.4.0.cpp\cpp\src\stdafx.h" />
+    <ClInclude Include="..\model.h" />
+    <ClInclude Include="..\patch.h" />
+    <ClInclude Include="..\perfect_gas_hllc_3d.h" />
+    <ClInclude Include="..\perfect_gas_roe_3d.h" />
+    <ClInclude Include="..\releigh-taylor_comp.h" />
+    <ClInclude Include="..\resource.h" />
+    <ClInclude Include="..\riemannsolvers.h" />
+    <ClInclude Include="..\RTI_solution_processor.h" />
+    <ClInclude Include="..\SAmodel.h" />
+    <ClInclude Include="..\temporary_tests.h" />
+    <ClInclude Include="..\tests.h" />
+    <ClInclude Include="..\triangleload.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
