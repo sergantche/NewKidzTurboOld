@@ -249,6 +249,9 @@ ConservativeVariables CD_InitDistribution(Vector r, void *par) {
 
 // run RP test
 bool RunRiemannProblemTestRoe(ConservativeVariables(*funcInitValue)(Vector, void *), int N_cells, double time, int order) {
+	int save_solution_It = 50;
+	int show_log_It = 100;
+
 	Model<Roe3DSolverPerfectGas> model;
 	Grid grid;
 
@@ -284,18 +287,24 @@ bool RunRiemannProblemTestRoe(ConservativeVariables(*funcInitValue)(Vector, void
 	model.SetBoundaryCondition("left", NaturalBC);
 	model.SetBoundaryCondition("right", NaturalBC);
 
-	model.SaveToTechPlot("RP_Test_Init.dat");
+	// Save init state
+	std::string fname{ "RP_Test" };
+	model.SaveToTechPlot(fname + "_Init.dat");
 
-	//Total time
+	// Calculation starts
 		for (int i = 0; i < 200000000; i++) {
 		model.Step();
-		if (i % 50 == 0) {
+		if (i % show_log_It == 0) {
 			std::cout<<"Interation = "<<i<<"\n";
 			std::cout<<"TimeStep = "<<model.stepInfo.TimeStep<<"\n";
 			for (int k = 0; k<5; k++) std::cout<<"Residual["<<k<<"] = "<<model.stepInfo.Residual[k]<<"\n";
 			std::cout<<"TotalTime = "<<model.totalTime<<"\n";
 		};
-		model.SaveToTechPlot("RP_Test.dat");
+		if (i % save_solution_It == 0) {
+			std::stringstream iter;
+			iter << i;
+			model.SaveToTechPlot(fname + iter.str() + ".dat");
+		};
 		if (model.totalTime > time) break;
 	};
 

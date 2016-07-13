@@ -20,7 +20,7 @@ double ComputeElementMeasure() {
 	return 0;
 };
 
-//Compute gradient using least squares
+// Compute gradient using least squares
 Vector ComputeGradientByPoints(Vector point, double value, const std::vector<Vector>& points, const std::vector<double>& values, int nDims) {
 	Vector grad;
 
@@ -56,6 +56,36 @@ Vector ComputeGradientByPoints(Vector point, double value, const std::vector<Vec
 	if (nDims > 2) grad.z = x(2);
 
 	return grad;
+};
+
+// !Rough algorithm for space reconstruction
+Vector ComputeLinearGradient(Vector point, double value, const std::vector<Vector>& points, const std::vector<double>& values, int nDims) {
+	
+	auto eps_min{ std::numeric_limits<double>::min() };
+	Vector res;
+
+	// Find the most "right" and the most "left" points in all direction and compute components of the gradient
+	auto pos_max{ 0.0 };
+	auto pos_min{ 0.0 };
+	auto val_r{ 0.0 };
+	auto val_l{ 0.0 };
+	for (auto i = 0; i < points.size(); i++) {
+		auto delta_x = points[i].x - point.x;
+		if (delta_x > pos_max + eps_min) {
+			pos_max = delta_x;
+			val_r = values[i];
+		};
+		if (delta_x < pos_min - eps_min) {
+			pos_min = delta_x;
+			val_l = values[i];
+		};
+	};
+	if(pos_max - pos_min > 5.0 * eps_min)	res.x = (val_r - val_l) / (pos_max - pos_min);
+
+	// Repeat for 2D and 3D case (TO DO)
+	
+	
+	return res;
 };
 
 #endif

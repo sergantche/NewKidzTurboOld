@@ -7,8 +7,13 @@
 //Main program
 int main(int argc, char *argv[]) {
 
-	RunRiemannProblemTestRoe(CD_InitDistribution, 200, 0.2, 2);
+	RunRiemannProblemTestRoe(SODTestInitDistribution, 200, 0.25, 2);
+	//RunRiemannProblemTestRoe(CD_InitDistribution, 10, 0.2, 2);
 	//RunBlasiusTest();		//test has bad grid (not from ANSYS)
+	
+
+
+	// Old part of experiments
 	//RunSAFlatPlate();
 	//RunGAWCalculation();
 	//RunPoiseuilleTest();
