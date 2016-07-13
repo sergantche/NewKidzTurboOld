@@ -7,6 +7,8 @@
 //Main program
 int main(int argc, char *argv[]) {
 
+	RunRiemannProblemTestRoe(CD_InitDistribution, 200, 0.2, 2);
+	//RunBlasiusTest();		//test has bad grid (not from ANSYS)
 	//RunSAFlatPlate();
 	//RunGAWCalculation();
 	//RunPoiseuilleTest();
@@ -15,7 +17,7 @@ int main(int argc, char *argv[]) {
 	//RunRiemannProblemTestRoe(ToroTestInitDistribution4, 200, 0.035, 2);
 	//RunRiemannProblemTestHLLC(SODTestInitDistribution, 400, 0.2, 2);
 	//RunShearFlowTest();
-	RunBlasiusTest();		//test has bad grid (not from ANSYS)
+
 	//RunIncompressibleBlasius();
 	//RunBiffFlatPlane();
 	//RunGLSFlatPlane();

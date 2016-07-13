@@ -644,7 +644,7 @@ public:
 		};
 	};
 
-	std::vector<double> res(5,1);			//Limiter values for all conservetive variables in Cell c					
+	std::vector<double> res(5,1);			//Limiter values for all conservative variables in Cell c					
 	std::vector<Vector> grad;				//Gradient in Cell c
 	grad.push_back(gradCellsRo[c.GlobalIndex]);
 	grad.push_back(gradCellsRoU[c.GlobalIndex]);
@@ -656,7 +656,7 @@ public:
 	{
 		std::vector<double> res_new(5);			//to find minimal values
 		Vector FaceCenter = _grid.faces[c.Faces[i]].FaceCenter;
-		std::vector<double> delta2(5);							//special function					
+		std::vector<double> delta2(5);							// difference in values between FaceCentor and CellCenter points					
 		for(int j=0; j<5; j++)
 		{
 			delta2[j] = grad[j]*(FaceCenter - c.CellCenter);
@@ -741,30 +741,24 @@ public:
 		for (int i = 0; i<cells.size(); i++) {
 			Cell c = *cells[i];
 			//std::vector<double> sumFluxV = sumFluxCell[c.GlobalIndex];
-			bool ExtCell = false;	//TO DO DELETE
 
 			//For each face			
  			for (int k = 0; k<5; k++) sumFlux[k] = 0;
 			for (int k = 0; k<5; k++) sumFluxC[k] = 0;
 			for (int k = 0; k<5; k++) sumFluxV[k] = 0;
 
-			double P = GetPressure(U[c.GlobalIndex]);	//WID
-			
 			for (int j = 0; j<c.Faces.size(); j++) {
 				Face& f = _grid.faces[c.Faces[j]];
 				std::vector<double> flux = fluxes[f.GlobalIndex];// * f.FaceSquare;					
 				std::vector<double> vflux = vfluxes[f.GlobalIndex];// * f.FaceSquare;		
-				if(f.isExternal) ExtCell = true;
 				
 				//Consider direction
 				//sumFlux += (flux - vflux) * f.FaceSquare;
 				if (c.GlobalIndex == f.FaceCell_1) {
-					if (!f.isExternal) P = GetPressure(U[f.FaceCell_2]);	//WID
 					sumFluxC -= flux * f.FaceSquare;
 					sumFluxV += vflux * f.FaceSquare;
 					sumFlux -= (flux - vflux) * f.FaceSquare;
 				} else {
-					if (!f.isExternal) P = GetPressure(U[f.FaceCell_1]);	//WID
 					sumFluxC += flux * f.FaceSquare;
 					sumFluxV -= vflux * f.FaceSquare;
 					sumFlux += (flux - vflux) * f.FaceSquare;
@@ -846,7 +840,7 @@ public:
 		for (int i = 0; i<faces.size(); i++) {
 			Face& f = *faces[i];
 			if(f.isExternal) fluxes[f.GlobalIndex] = _boundaryConditions[f.BCMarker]->ComputeConvectiveFlux(f);
-			else fluxes[f.GlobalIndex] = ComputeConvectiveFlux(f);		
+ 			else fluxes[f.GlobalIndex] = ComputeConvectiveFlux(f);		
 			
 			//Additional stability requirement
 			double C = 4;
@@ -3331,7 +3325,7 @@ public:
 			};
 
 			double cellValue =  (this->*func)(U[cell.GlobalIndex]);
-			grads[cell.GlobalIndex] = ComputeGradientByPoints(cell.CellCenter, cellValue, nPoints, nValues);
+			grads[cell.GlobalIndex] = ComputeGradientByPoints(cell.CellCenter, cellValue, nPoints, nValues, _grid.gridInfo.GridDimensions);
 		};	
 
 		return;

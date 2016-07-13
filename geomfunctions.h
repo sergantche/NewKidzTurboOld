@@ -21,22 +21,21 @@ double ComputeElementMeasure() {
 };
 
 //Compute gradient using least squares
-Vector ComputeGradientByPoints(Vector point, double value, const std::vector<Vector>& points, const std::vector<double>& values, int Dims = 2) {
+Vector ComputeGradientByPoints(Vector point, double value, const std::vector<Vector>& points, const std::vector<double>& values, int nDims) {
 	Vector grad;
 
 	//Input	
-	int n = Dims; //Number of dimensions (unknowns)	
 	int m = points.size(); //Number of equations
 	int nrhs = 1; //Number of right hand side
-	Eigen::MatrixXd A(m, n);
+	Eigen::MatrixXd A(m, nDims);
 	Eigen::VectorXd rhs(nrhs*m);
 
 	//Compose matrices 				
 	for (int i = 0; i<points.size(); i++) {
 		Vector dr = point - points[i];
 		A(i, 0) = dr.x;
-		if (n > 1) A(i, 1) = dr.y;
-		if (n > 2) A(i, 2) = dr.z;
+		if (nDims > 1) A(i, 1) = dr.y;
+		if (nDims > 2) A(i, 2) = dr.z;
 	};
 
 	for (int i = 0; i<points.size(); i++) {
@@ -49,12 +48,12 @@ Vector ComputeGradientByPoints(Vector point, double value, const std::vector<Vec
 	Eigen::VectorXd x = svd.solve(rhs);
 
 	//Check rank deficiency case
-	if (svd.rank() < Dims) throw std::exception("Could not solve for gradient due to rank deficiency");
+	if (svd.rank() < nDims) throw std::exception("Could not solve for gradient due to rank deficiency");
 
 	//Output
 	grad = Vector(x(0), 0, 0);
-	if (n > 1) grad.y = x(1);
-	if (n > 2) grad.z = x(2);
+	if (nDims > 1) grad.y = x(1);
+	if (nDims > 2) grad.z = x(2);
 
 	return grad;
 };

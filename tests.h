@@ -211,6 +211,43 @@ ConservativeVariables ToroTestInitDistribution4(Vector r, void *par) {
 		return UR;
 	};
 };
+
+// initial conditions for contact discontinuity test
+ConservativeVariables CD_InitDistribution(Vector r, void *par) {
+	//Gamma
+	double gamma = 1.4;
+
+	// Left state
+	double roL = 1.0;
+	double pL = 1.0;
+	Vector vL = Vector(1.0, 0, 0);
+	ConservativeVariables UL;
+	UL.ro = roL;
+	UL.rou = roL * vL.x;
+	UL.rov = roL * vL.y;
+	UL.row = roL * vL.z;
+	UL.roE = pL / (gamma - 1) + roL * vL.mod() * vL.mod() / 2.0;
+	
+	// Right state
+	double roR = 0.125;
+	double pR = 1.0;
+	Vector vR = Vector(1.0, 0, 0);
+	ConservativeVariables UR;
+	UR.ro = roR;
+	UR.rou = roR * vR.x;
+	UR.rov = roR * vR.y;
+	UR.row = roR * vR.z;
+	UR.roE = pR / (gamma - 1) + roR * vR.mod() * vR.mod() / 2.0;
+
+	if (r.x <= 0.2) {
+		return UL;
+	}
+	else {
+		return UR;
+	};
+};
+
+// run RP test
 bool RunRiemannProblemTestRoe(ConservativeVariables(*funcInitValue)(Vector, void *), int N_cells, double time, int order) {
 	Model<Roe3DSolverPerfectGas> model;
 	Grid grid;
@@ -230,7 +267,7 @@ bool RunRiemannProblemTestRoe(ConservativeVariables(*funcInitValue)(Vector, void
 	model.DisableViscous();
 
 	//Set computational settings
-	model.SetCFLNumber(0.35);
+	model.SetCFLNumber(0.45);
 	model.SetHartenEps(0.005);
 	model.SetSchemeOrder(order);
 
@@ -252,7 +289,7 @@ bool RunRiemannProblemTestRoe(ConservativeVariables(*funcInitValue)(Vector, void
 	//Total time
 		for (int i = 0; i < 200000000; i++) {
 		model.Step();
-		if (i % 10 == 0) {
+		if (i % 50 == 0) {
 			std::cout<<"Interation = "<<i<<"\n";
 			std::cout<<"TimeStep = "<<model.stepInfo.TimeStep<<"\n";
 			for (int k = 0; k<5; k++) std::cout<<"Residual["<<k<<"] = "<<model.stepInfo.Residual[k]<<"\n";
@@ -933,16 +970,16 @@ void RunBlasiusTest(){
 
 	// Create grid with compression to plate end 
 	FlatPlate::GridSettings good_grid;
-	good_grid.N = 80;
-	good_grid.M = 40;
+	good_grid.N = 60;
+	good_grid.M = 30;
 	good_grid.x_min = -0.2;
 	good_grid.x_plate = xPlateStart;
 	good_grid.x_max = 1.0;
 	good_grid.y_min = 0.0;
 	good_grid.y_max = 0.5;
-	good_grid.q_xl = 1.3;
-	good_grid.q_xr = 1.05;
-	good_grid.q_y = 1.1;
+	good_grid.q_xl = 1.0;
+	good_grid.q_xr = 1.0;
+	good_grid.q_y = 1.0;
 	Grid grid = FlatPlate::BlasiusFlatPlate(good_grid);
 
 	// Initialize medium model and place boundary conditions
