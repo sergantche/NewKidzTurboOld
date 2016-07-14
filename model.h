@@ -3325,9 +3325,9 @@ public:
 			};
 
 			double cellValue =  (this->*func)(U[cell.GlobalIndex]);
-			// TO DO return to computation by points
-			// grads[cell.GlobalIndex] = ComputeGradientByPoints(cell.CellCenter, cellValue, nPoints, nValues, _grid.gridInfo.GridDimensions);
-			grads[cell.GlobalIndex] = ComputeLinearGradient(cell.CellCenter, cellValue, nPoints, nValues, _grid.gridInfo.GridDimensions);
+			
+			grads[cell.GlobalIndex] = ComputeGradientByPoints(cell.CellCenter, cellValue, nPoints, nValues, _grid.gridInfo.GridDimensions);
+			// grads[cell.GlobalIndex] = ComputeLinearGradient(cell.CellCenter, cellValue, nPoints, nValues, _grid.gridInfo.GridDimensions);
 		};	
 
 		return;

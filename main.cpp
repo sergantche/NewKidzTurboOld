@@ -7,6 +7,9 @@
 //Main program
 int main(int argc, char *argv[]) {
 
+	//RunRiemannProblemTestRoe(ToroTestInitDistribution5, 200, 0.035, 2);
+	//RunRiemannProblemTestRoe(ToroTestInitDistribution4, 200, 0.035, 2);
+	//RunRiemannProblemTestRoe(ToroTestInitDistribution3, 20, 0.012, 2);
 	RunRiemannProblemTestRoe(SODTestInitDistribution, 200, 0.25, 2);
 	//RunRiemannProblemTestRoe(CD_InitDistribution, 10, 0.2, 2);
 	//RunBlasiusTest();		//test has bad grid (not from ANSYS)
@@ -18,9 +21,6 @@ int main(int argc, char *argv[]) {
 	//RunGAWCalculation();
 	//RunPoiseuilleTest();
 	//RunRiemannProblemTestHLLC(ToroTestInitDistribution1, 100, 0.15, 2);		// HLLC Test!
-	//RunRiemannProblemTestRoe(SODTestInitDistribution, 200, 0.15, 2);
-	//RunRiemannProblemTestRoe(ToroTestInitDistribution4, 200, 0.035, 2);
-	//RunRiemannProblemTestHLLC(SODTestInitDistribution, 400, 0.2, 2);
 	//RunShearFlowTest();
 
 	//RunIncompressibleBlasius();

@@ -180,7 +180,71 @@ ConservativeVariables ToroTestInitDistribution2(Vector r, void *par)	//не подход
 		return UR;
 	};
 };
+ConservativeVariables ToroTestInitDistribution3(Vector r, void *par) {
+	//Gamma
+	double gamma = 1.4;
+
+	//Left state x <= 0.5
+	double roL = 1.0;
+	double pL = 1000.0;
+	Vector vL = Vector(0.0, 0, 0);
+	ConservativeVariables UL;
+	UL.ro = roL;
+	UL.rou = roL * vL.x;
+	UL.rov = roL * vL.y;
+	UL.row = roL * vL.z;
+	UL.roE = pL / (gamma - 1) + roL * vL.mod() * vL.mod() / 2.0;
+	//Right state x > 0.5
+	double roR = 1.0;
+	double pR = 0.01;
+	Vector vR = Vector(0, 0, 0);
+	ConservativeVariables UR;
+	UR.ro = roR;
+	UR.rou = roR * vR.x;
+	UR.rov = roR * vR.y;
+	UR.row = roR * vR.z;
+	UR.roE = pR / (gamma - 1) + roR * vR.mod() * vR.mod() / 2.0;
+
+	if (r.x <= 0.5) {
+		return UL;
+	}
+	else {
+		return UR;
+	};
+};
 ConservativeVariables ToroTestInitDistribution4(Vector r, void *par) {
+	//Gamma
+	double gamma = 1.4;
+
+	//Left state x <= 0.5
+	double roL = 1.0;
+	double pL = 0.01;
+	Vector vL = Vector(0.0, 0, 0);
+	ConservativeVariables UL;
+	UL.ro = roL;
+	UL.rou = roL * vL.x;
+	UL.rov = roL * vL.y;
+	UL.row = roL * vL.z;
+	UL.roE = pL / (gamma - 1) + roL * vL.mod() * vL.mod() / 2.0;
+	//Right state x > 0.5
+	double roR = 1.0;
+	double pR = 100.0;
+	Vector vR = Vector(0, 0, 0);
+	ConservativeVariables UR;
+	UR.ro = roR;
+	UR.rou = roR * vR.x;
+	UR.rov = roR * vR.y;
+	UR.row = roR * vR.z;
+	UR.roE = pR / (gamma - 1) + roR * vR.mod() * vR.mod() / 2.0;
+
+	if (r.x <= 0.5) {
+		return UL;
+	}
+	else {
+		return UR;
+	};
+};
+ConservativeVariables ToroTestInitDistribution5(Vector r, void *par) {
 	//Gamma
 	double gamma = 1.4;
 
@@ -249,7 +313,7 @@ ConservativeVariables CD_InitDistribution(Vector r, void *par) {
 
 // run RP test
 bool RunRiemannProblemTestRoe(ConservativeVariables(*funcInitValue)(Vector, void *), int N_cells, double time, int order) {
-	int save_solution_It = 50;
+	int save_solution_It = 100;
 	int show_log_It = 100;
 
 	Model<Roe3DSolverPerfectGas> model;
@@ -305,7 +369,10 @@ bool RunRiemannProblemTestRoe(ConservativeVariables(*funcInitValue)(Vector, void
 			iter << i;
 			model.SaveToTechPlot(fname + iter.str() + ".dat");
 		};
-		if (model.totalTime > time) break;
+		if (model.totalTime > time) {
+			model.SaveToTechPlot(fname + ".dat");
+			break;
+		};
 	};
 
 	//Save result to techplot
