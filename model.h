@@ -108,7 +108,9 @@ public:
 	class NoSlipBoundaryCondition : public BoundaryCondition {
 	public:
 		NoSlipBoundaryCondition(Model& _model) : BoundaryCondition(_model) {};
-		std::vector<double> ComputeConvectiveFlux(Face& f)	{
+
+		// Explicit convective flux implementation 
+		/*std::vector<double> ComputeConvectiveFlux(Face& f)	{
 			ConservativeVariables UL = model.U[f.FaceCell_1];
 			std::vector<double> res(5,0);
 			double PL = (model.medium.Gamma - 1.0)*(UL.roE - 0.5*(UL.rou*UL.rou + UL.rov*UL.rov + UL.row*UL.row)/UL.ro);
@@ -117,7 +119,7 @@ public:
 			res[3] = PL*f.FaceNormal.z;
 
 			return res;
-		};
+		};*/
 
 		ConservativeVariables getDummyValues(ConservativeVariables inV, const Face& face) {
 			inV.rou *= -1;
@@ -630,13 +632,20 @@ public:
 		ConservativeVariables U_neigh;						//Values in i-neighbour cell
 		int neigh_cell;									//index of neighbour cell
 		Face cur_face = _grid.faces[c.Faces[i]];
-		if(cur_face.isExternal!=0) continue;
-		if(cur_face.FaceCell_1 == c.GlobalIndex)		//find i-neighbour cell
-		{
-			neigh_cell = cur_face.FaceCell_2;
-		}else neigh_cell = cur_face.FaceCell_1;
+		
+		// old manner
+		//if(cur_face.isExternal!=0) continue;
 
-		U_neigh = U[neigh_cell];				//Values of i-neighbour cell
+		if(cur_face.FaceCell_1 == c.GlobalIndex) {		//find i-neighbour cell
+			neigh_cell = cur_face.FaceCell_2;
+		} else neigh_cell = cur_face.FaceCell_1;
+
+		// new manner
+		if (cur_face.isExternal == 0) U_neigh = U[neigh_cell];	//Values of i-neighbour cell
+		else {
+			U_neigh = _boundaryConditions[cur_face.BCMarker]->getDummyValues(U_c, cur_face);
+		}; 			
+
 		for (int j = 0; j < 5; j++)
 		{
 				if(U_max[j] < U_neigh[j]) U_max[j] = U_neigh[j];	//find U_max,U_min
@@ -851,18 +860,18 @@ public:
 				if (!f.isExternal) {
 					double dX2 = _grid.cells[f.FaceCell_2].CellVolume / f.FaceSquare;
 					if (lambdaVisc < medium.Viscosity / (dX2 * U[f.FaceCell_2].ro)) lambdaVisc = medium.Viscosity / (dX2 * U[f.FaceCell_2].ro);
-				};				
+				};
 			};
 
-			//Adjust timestep						
-			double ts = _grid.cells[f.FaceCell_1].CellVolume/((rSolver.MaxEigenvalue + C * lambdaVisc) * f.FaceSquare);
+			//Adjust timestep	TO DO DELETE					
+			/*double ts = _grid.cells[f.FaceCell_1].CellVolume/((rSolver.MaxEigenvalue + C * lambdaVisc) * f.FaceSquare);
 			if (stepInfo.TimeStep > ts) {
 				stepInfo.TimeStep = ts;
 			};
 			if (!f.isExternal) {				
 				ts = _grid.cells[f.FaceCell_2].CellVolume/((rSolver.MaxEigenvalue + C * lambdaVisc) * f.FaceSquare);
 				if (stepInfo.TimeStep > ts) stepInfo.TimeStep = ts;
-			};
+			};*/
 
 			//Blaizek time step algorithm
 			stepInfo.LyambdaC[f.GlobalIndex] = rSolver.MaxEigenvalue*f.FaceSquare;

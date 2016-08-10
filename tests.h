@@ -1068,13 +1068,15 @@ void RunBlasiusTest(){
 	model.SetMolecularWeight(28.966);
 
 	//model.SetViscosity(1.7894e-05);
-	model.SetViscosity(1.7894e-03);
-	model.SetThermalConductivity(0.0242);
+	//model.SetViscosity(1.7894e-03);
+	model.SetViscosity(0.0);
+	//model.SetThermalConductivity(0.0242);
+	model.SetThermalConductivity(0.0);
 	model.SetAngle(0.000001);
 
 
 	//Set computational settings
-	model.SetCFLNumber(0.35);
+	model.SetCFLNumber(0.45);
 	model.SetHartenEps(0.05);
 
 	std::vector<Face*> faces = grid.faces.getLocalNodes();
@@ -1100,9 +1102,10 @@ void RunBlasiusTest(){
 
 	// Computation settings
 	comp_settings.MaxIter = 1000000;
-	comp_settings.MaxTime = 10 * (good_grid.x_max - good_grid.x_min ) / velocity.x;
+	//comp_settings.MaxTime = 10 * (good_grid.x_max - good_grid.x_min ) / velocity.x;
+	comp_settings.MaxTime = 0.1;
 	comp_settings.OutputIter = 50;
-	comp_settings.SolutionIter = 500;
+	comp_settings.SolutionIter = 50;
 
 	//Boundary conditions
 	//Inlet boundary
@@ -1126,12 +1129,9 @@ void RunBlasiusTest(){
 	model.SetBoundaryCondition("top", SymmetryBC);
 	model.SetBoundaryCondition("bottom_left", SymmetryBC);
 
-	//Set wall boundaries		
-	//model.SetWallBoundary("bottom", true);
-	//model.ComputeWallDistances();
-	//model.DistanceSorting();
-	model.EnableViscous();
-	//model.DisableViscous();
+	//Method configuration
+	//model.EnableViscous();
+	model.DisableViscous();
 	model.SchemeOrder = 2;
 	model.EnableLimiter();
 
@@ -1172,6 +1172,161 @@ void RunBlasiusTest(){
 
 	return;
 }
+
+// TO DO DELETE
+void RunBlasiusTestDebug() {
+
+	struct {
+		int OutputIter;
+		int SolutionIter;
+		int MaxIter;
+		double MaxTime;
+	} comp_settings;
+
+	//End of plate
+	const double xPlateStart = 0.0;
+
+	/*
+	//Load cgns grid
+	double Lx{ 1.2 };
+	double Ly{ 0.5 };
+	int N{ 30 };
+	int M{ 40 };
+	double qx{ 1.09 };
+	double qy{ 1.09 };
+
+	// Compress grid in Y direction
+	Grid grid = GenGrid2D(N, M, -0.2, Lx - 0.2, 0, Ly, qx, qy);
+	*/
+
+	// Create grid with compression to plate end 
+	FlatPlate::GridSettings good_grid;
+	good_grid.N = 4;
+	good_grid.M = 2;
+	good_grid.x_min = -0.2;
+	good_grid.x_plate = xPlateStart;
+	good_grid.x_max = 0.2;
+	good_grid.y_min = 0.0;
+	good_grid.y_max = 0.5;
+	good_grid.q_xl = 1.0;
+	good_grid.q_xr = 1.0;
+	good_grid.q_y = 1.0;
+	Grid grid = FlatPlate::BlasiusFlatPlate(good_grid);
+
+	// Initialize medium model and place boundary conditions
+	Model<Roe3DSolverPerfectGas> model;
+
+	//Set fluid properties
+	//Air
+	model.SetGamma(1.4);
+	model.SetCv(1006.43 / 1.4);
+	model.SetMolecularWeight(28.966);
+
+	//model.SetViscosity(1.7894e-05);
+	//model.SetViscosity(1.7894e-03);
+	model.SetViscosity(0.0);
+	//model.SetThermalConductivity(0.0242);
+	model.SetThermalConductivity(0.0);
+	model.SetAngle(0.000001);
+	
+	//Set computational settings
+	model.SetCFLNumber(0.45);
+	model.SetHartenEps(0.05);
+
+	std::vector<Face*> faces = grid.faces.getLocalNodes();
+	for (int i = 0; i<faces.size(); i++) {
+		Face& f = *faces[i];
+		if ((f.BCMarker == 3) && (f.FaceCenter.x < xPlateStart)) {
+			f.BCMarker = 5;
+		};
+	};
+
+	////Bind computational grid
+	model.BindGrid(grid);
+
+	////Initial conditions
+	ConservativeVariables initValues(0);
+
+	Vector velocity(10.0, 0, 0);
+	double pressure = 101579;
+	double temperature = 300.214;
+
+	initValues = model.PrimitiveToConservativeVariables(velocity, pressure, temperature, model.medium);
+	model.SetInitialConditions(initValues);
+
+	// Computation settings
+	comp_settings.MaxIter = 1000000;
+	//comp_settings.MaxTime = 10 * (good_grid.x_max - good_grid.x_min ) / velocity.x;
+	comp_settings.MaxTime = 0.1;
+	comp_settings.OutputIter = 1;
+	comp_settings.SolutionIter = 1;
+
+	//Boundary conditions
+	//Inlet boundary
+	Model<Roe3DSolverPerfectGas>::InletBoundaryCondition InletBC(model);
+	InletBC.setParams(pressure, temperature, velocity);
+
+	//Outlet boundary
+	Model<Roe3DSolverPerfectGas>::SubsonicOutletBoundaryCondition OutletBC(model);
+	OutletBC.setParams(pressure);
+
+	//Symmetry boundary
+	Model<Roe3DSolverPerfectGas>::SymmetryBoundaryCondition SymmetryBC(model);
+
+	//No slip boundary
+	Model<Roe3DSolverPerfectGas>::NoSlipBoundaryCondition NoSlipBC(model);
+
+	//Set boundary conditions
+	model.SetBoundaryCondition("left", InletBC);
+	model.SetBoundaryCondition("right", OutletBC);
+	model.SetBoundaryCondition("bottom", NoSlipBC);
+	model.SetBoundaryCondition("top", SymmetryBC);
+	model.SetBoundaryCondition("bottom_left", SymmetryBC);
+
+	//Method configuration
+	//model.EnableViscous();
+	model.DisableViscous();
+	model.SchemeOrder = 2;
+	model.EnableLimiter();
+
+	//Save initial solution
+	model.ComputeGradients();
+	model.SaveToTechPlot("init.dat");
+
+	//Load solution
+	std::string outputSolutionFile = "solution";
+	//model.LoadSolution(outputSolutionFile+".txt");
+
+	//Run simulation
+	bool isSave = true;
+	for (int i = 0; i < comp_settings.MaxIter; i++) {
+		model.Step();
+		if (i % comp_settings.OutputIter == 0) {
+			std::cout << "Interation = " << i << "\n";
+			std::cout << "TimeStep = " << model.stepInfo.TimeStep << "\n";
+			for (int k = 0; k<5; k++) std::cout << "Residual[" << k << "] = " << model.stepInfo.Residual[k] << "\n";
+			std::cout << "TotalTime = " << model.totalTime << "\n";
+		};
+		if ((i % comp_settings.SolutionIter == 0) && (isSave)) {
+			model.SaveSolution(outputSolutionFile + ".txt");
+			model.SaveToTechPlot(outputSolutionFile + ".dat");
+			model.SaveSliceToTechPlot("u1_0.dat", 0.2, 10.5, 0.96, 1.01, 0, 0.06);
+			model.SaveSliceToTechPlot("u0_8.dat", 0.2, 10.5, 0.76, 0.8, 0, 0.06);
+		};
+		if (model.totalTime > comp_settings.MaxTime) break;
+	};
+
+	//Save result to techplot
+	if (isSave) {
+		model.SaveSolution(outputSolutionFile + ".txt");
+		model.SaveToTechPlot(outputSolutionFile + ".dat");
+		model.SaveSliceToTechPlot("u1_0.dat", 0.2, 10.5, 0.96, 1.01, 0, 0.06);
+		model.SaveSliceToTechPlot("u0_8.dat", 0.2, 10.5, 0.76, 0.8, 0, 0.06);
+	};
+
+	return;
+}
+
 void RunIncompressibleBlasius()
 {
 	Flow2D model;
