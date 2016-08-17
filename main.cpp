@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 	//RunRiemannProblemTestRoe(CD_InitDistribution, 10, 0.2, 2);
 	//RunBlasiusTest();		//test has bad grid (not from ANSYS)
 	
-	RunBlasiusTest();
+	RunBlasiusTestDebug();
 
 	// Old part of experiments
 	//RunSAFlatPlate();

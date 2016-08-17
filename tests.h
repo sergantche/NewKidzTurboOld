@@ -1101,7 +1101,7 @@ void RunBlasiusTest(){
 	model.SetInitialConditions(initValues);
 
 	// Computation settings
-	comp_settings.MaxIter = 1000000;
+	comp_settings.MaxIter = 20;
 	//comp_settings.MaxTime = 10 * (good_grid.x_max - good_grid.x_min ) / velocity.x;
 	comp_settings.MaxTime = 0.1;
 	comp_settings.OutputIter = 50;
@@ -1154,8 +1154,9 @@ void RunBlasiusTest(){
 			std::cout<<"TotalTime = "<<model.totalTime<<"\n";
 		};
 		if ((i % comp_settings.SolutionIter == 0) && (isSave)) {
-			model.SaveSolution(outputSolutionFile+".txt");
-			model.SaveToTechPlot(outputSolutionFile+".dat");
+			model.SaveSolution(outputSolutionFile + ".txt");
+			std::stringstream str_i;	str_i << i;
+			model.SaveToTechPlot(outputSolutionFile + str_i.str() + ".dat");
 			model.SaveSliceToTechPlot("u1_0.dat", 0.2, 10.5, 0.96, 1.01, 0, 0.06);
 			model.SaveSliceToTechPlot("u0_8.dat", 0.2, 10.5, 0.76, 0.8, 0, 0.06);
 		};
@@ -1255,7 +1256,7 @@ void RunBlasiusTestDebug() {
 	model.SetInitialConditions(initValues);
 
 	// Computation settings
-	comp_settings.MaxIter = 1000000;
+	comp_settings.MaxIter = 25;
 	//comp_settings.MaxTime = 10 * (good_grid.x_max - good_grid.x_min ) / velocity.x;
 	comp_settings.MaxTime = 0.1;
 	comp_settings.OutputIter = 1;
@@ -1267,9 +1268,8 @@ void RunBlasiusTestDebug() {
 	InletBC.setParams(pressure, temperature, velocity);
 
 	//Outlet boundary
-	Model<Roe3DSolverPerfectGas>::SubsonicOutletBoundaryCondition OutletBC(model);
-	OutletBC.setParams(pressure);
-
+	Model<Roe3DSolverPerfectGas>::NaturalCondition OutletBC(model);
+	
 	//Symmetry boundary
 	Model<Roe3DSolverPerfectGas>::SymmetryBoundaryCondition SymmetryBC(model);
 
@@ -1299,29 +1299,25 @@ void RunBlasiusTestDebug() {
 
 	//Run simulation
 	bool isSave = true;
-	for (int i = 0; i < comp_settings.MaxIter; i++) {
+	for (int i = 1; i <= comp_settings.MaxIter; i++) {
 		model.Step();
 		if (i % comp_settings.OutputIter == 0) {
 			std::cout << "Interation = " << i << "\n";
 			std::cout << "TimeStep = " << model.stepInfo.TimeStep << "\n";
-			for (int k = 0; k<5; k++) std::cout << "Residual[" << k << "] = " << model.stepInfo.Residual[k] << "\n";
-			std::cout << "TotalTime = " << model.totalTime << "\n";
+			std::cout << "TotalTime = " << model.totalTime << "\n" << "\n";
 		};
 		if ((i % comp_settings.SolutionIter == 0) && (isSave)) {
 			model.SaveSolution(outputSolutionFile + ".txt");
-			model.SaveToTechPlot(outputSolutionFile + ".dat");
-			model.SaveSliceToTechPlot("u1_0.dat", 0.2, 10.5, 0.96, 1.01, 0, 0.06);
-			model.SaveSliceToTechPlot("u0_8.dat", 0.2, 10.5, 0.76, 0.8, 0, 0.06);
+			std::stringstream str_i;	str_i << i;
+			model.SaveToTechPlot(outputSolutionFile + str_i.str() + ".dat");
 		};
 		if (model.totalTime > comp_settings.MaxTime) break;
 	};
 
 	//Save result to techplot
 	if (isSave) {
-		model.SaveSolution(outputSolutionFile + ".txt");
 		model.SaveToTechPlot(outputSolutionFile + ".dat");
-		model.SaveSliceToTechPlot("u1_0.dat", 0.2, 10.5, 0.96, 1.01, 0, 0.06);
-		model.SaveSliceToTechPlot("u0_8.dat", 0.2, 10.5, 0.76, 0.8, 0, 0.06);
+		model.SaveSolution(outputSolutionFile + ".txt");
 	};
 
 	return;
